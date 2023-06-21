@@ -1,0 +1,38 @@
+{
+  "properties": {
+    "name": "BriteApp - Backend",
+    "version": "1.0",
+    "description": "BriteApp an event and workshop registration application"
+  },
+  "keywords":["BriteApp","events","UPeU workshops"],
+  "public_paths": {
+    "Events": [
+      "/workshop?"
+    ]
+  },
+  "url": "/info",
+  "sponsor": "UPeU-TPP",
+  "licence": "ISC",
+  "authors": [
+    {
+      "name": "Omar Guerrero",
+      "role": "developer",
+      "github": "https://github.com/omargpx"
+    },
+    {
+      "name": "David Prada",
+      "role": "developer",
+      "github": "https://github.com/davichois"
+    },
+    {
+      "name": "Wilmer Edquen",
+      "role": "designer",
+      "github": "https://github.com/"
+    },
+    {
+      "name": "Roberto Flores",
+      "role": "Designer",
+      "github": "https://github.com/"
+    }
+  ]
+}
