@@ -3,6 +3,7 @@ package com.citse.briteapp.service.logic;
 import com.citse.briteapp.entity.Person;
 import com.citse.briteapp.entity.User;
 import com.citse.briteapp.error.GUSException;
+import com.citse.briteapp.model.UserExists;
 import com.citse.briteapp.repository.PersonDao;
 import com.citse.briteapp.model.Servants;
 import com.citse.briteapp.repository.UserDao;
@@ -82,5 +83,17 @@ public class PersonServiceImp implements PersonService {
         if (null!=person)
             return person;
         throw new GUSException(Servants.PERSON_SERVICE.name(), null, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public void updateUsername(int userId, UserExists userExists) {
+        User user = userDao.findById(userId).orElse(null);
+        if(user==null)
+            throw new GUSException(Servants.PERSON_SERVICE.name(), "USER NOT FOUND",HttpStatus.NOT_FOUND);
+        Person p = repo.selectPersonByUserId(userId);
+        p.setAvatar(userExists.getAvatar());
+        user.setUsername(userExists.getUsername());
+        userDao.save(user);
+        repo.save(p);
     }
 }

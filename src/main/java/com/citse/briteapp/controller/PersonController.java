@@ -3,6 +3,7 @@ package com.citse.briteapp.controller;
 import com.citse.briteapp.entity.Person;
 import com.citse.briteapp.error.GUSException;
 import com.citse.briteapp.model.Servants;
+import com.citse.briteapp.model.UserExists;
 import com.citse.briteapp.service.GUSMethods;
 import com.citse.briteapp.service.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,6 +65,17 @@ public class PersonController {
         person.setIdentification(p.getIdentification() != null? p.getIdentification() : person.getIdentification());
         return ResponseEntity.ok(gus.getResponse(request,service_name,service.save(person),HttpStatus.OK));
     }
+
+    @PutMapping("/user-update")
+    public ResponseEntity<?> userUpdate(@RequestParam(name = "id",required = false)Integer id,
+                                        @RequestParam(name = "token",required = false)String TOKEN,
+                                        @RequestBody UserExists userExists, HttpServletRequest request){
+        if(!Objects.equals(TOKEN, env.getProperty("config.brite-access.security-token-permission")))
+            throw new GUSException(service_name, null, HttpStatus.UNAUTHORIZED);
+        service.updateUsername(id,userExists);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @DeleteMapping
     public ResponseEntity<?> delete(@RequestParam(name = "id",required = false)Integer id,
                                     @RequestParam(name = "token",required = false)String TOKEN,

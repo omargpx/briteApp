@@ -1,6 +1,7 @@
 package com.citse.briteapp.service;
 
 import com.citse.briteapp.entity.Person;
+import com.citse.briteapp.model.UserExists;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface PersonService {
     // filters
     List<Person> findByName(String name);
     Person getByCode(String code);
+
+    // extras
+    void updateUsername(int userId, UserExists userExists);
 }

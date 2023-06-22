@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class SubscriptionServiceImp implements SubscriptionService {
@@ -49,7 +50,8 @@ public class SubscriptionServiceImp implements SubscriptionService {
             throw new GUSException(Servants.SUBSCRIPTION_SERVICE.name(),"LIMITE ALCANZADO",HttpStatus.PARTIAL_CONTENT);
         LocalDate today = LocalDate.now();
         subscription.setDate(today);
-        subscription.setCode(gus.genSecureCode("BSS"));
+        Random random = new Random();
+        subscription.setCode(String.valueOf(random.nextInt(999999)));
         return repo.save(subscription);
     }
 
